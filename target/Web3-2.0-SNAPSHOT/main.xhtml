@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<!--        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//RU"-->
+<!--        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Основная страница</title>
+    <link rel="stylesheet" type="text/css" href="css/mainStyle.css"/>
+</h:head>
+
+<h:body>
+    <div class="page">
+        <div id="header"> <h:form>
+            <p:commandButton action="toIndex" value="Назад"/>
+            <span>Сударушкин Ярослав P3214<br/>
+                Вариант 41304</span><br/>
+            </h:form>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="content">
+        <div id="left">
+            <h:commandButton styleClass="button button3" value="Очистить таблицу" action="#{mainDataBean.clearAll()}">
+                <f:ajax onevent="updateCanv" event="click" render="request-coordinates answer-table"/>
+            </h:commandButton>
+            <h:dataTable value="#{mainDataBean.dots}" var="dot" id="answer-table">
+
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    #{dot.x}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    #{dot.y}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    #{dot.r}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Попадание</f:facet>
+                    #{dot.res}
+                </h:column>
+            </h:dataTable>
+        </div>
+        <div id="right">
+            <canvas id="graph" width="250" height="250" >Возникла ошибка с canvas</canvas>
+            <p>Зона, в которую надо попасть</p>
+            <div id="request">
+                <h:form id="request-coordinates" autocomplete="off">
+
+                    <h:outputLabel for="x">X(-5;3):</h:outputLabel>
+                    <h:inputText id="x" value="#{mainDataBean.newDot.x}" styleClass="need_validate_x"
+                                 required="true"
+                                 size="3"
+                                 requiredMessage="Введите X в пределах (-5;3); "
+                                 validatorMessage="X должен быть в диапазоне от -5 до 3; "
+                                 converterMessage="Введите X в пределах (-5;3); "
+                                 onkeyup='validateInput("request-coordinates:x",-5, 3)'
+                                 maxlength="7"
+                    >
+                        <f:validateLength minimum="1" maximum="7"/>
+                        <f:validateDoubleRange minimum="-5" maximum="3"/>
+                    </h:inputText>
+                    <br/>
+                    <h:outputLabel for="y">Y:  <h:outputText id="y_out" value="#{mainDataBean.newDot.y}"/></h:outputLabel>
+<!--                    <ace:sliderEntry id="y" value="#{mainDataBean.newDot.y}"-->
+<!--                                     min="-3"-->
+<!--                                     max="3"-->
+<!--                                     clickableRail="true"-->
+<!--                                     stepPercent="8.3333"-->
+<!--                                     showLabels="true"-->
+<!--                                     labelPosition=""-->
+<!--                    >-->
+<!--                        <ace:ajax event="slideEnd" execute="@this" render="@form" />-->
+<!--                    </ace:sliderEntry>-->
+
+                    <br/>
+                        <h:inputHidden id="y" value="#{mainDataBean.newDot.y}" required="true"/>
+                        <p:slider for="y" minValue="-3" maxValue="3" display="y_out" step="0.5" style="width: 50%; margin: auto"/>
+                    <br/>
+                    <h:outputLabel for="r">R(1;4):</h:outputLabel>
+                    <h:inputText id="r" value="#{mainDataBean.newDot.r}"
+                                 styleClass="need_validate_r"
+                                 required="true"
+                                 size="3"
+                                 requiredMessage="Введите R в диапазоне (1;4); "
+                                 validatorMessage="R должен быть в диапазоне от 1 до 4; "
+                                 converterMessage="Введите R в диапазоне (1;4); "
+                                 onkeyup='validateInput("request-coordinates:r",1, 4)'
+                                 maxlength="7"
+                                 onchange="reDraw()"
+                    >
+                        <f:validateLength minimum="1" maximum="7"/>
+                        <f:validateDoubleRange minimum="1" maximum="4"/>
+                    </h:inputText>
+                    <br/>
+                    <div>
+                        <h:message class="error" for="x"/>
+                        <h:message class="error" for="y"/>
+                        <h:message class="error" for="r"/>
+                    </div>
+                    <h:commandButton  id="submit-button" value="Отправить" styleClass="button1 button" action="#{mainDataBean.addDot()}" type="submit" >
+                        <f:ajax onevent="updateCanv" event="click" execute="@form" render="answer-table @form"/>
+                    </h:commandButton>
+                </h:form>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <script src="js/canvasPlus.js"></script>
+    <script src="js/input_valid.js"></script>
+
+
+</h:body>
+
+</html>

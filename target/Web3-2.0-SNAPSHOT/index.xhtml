@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<!--        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"-->
+<!--        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Стартовая страница</title>
+    <link rel="stylesheet" href="css/indexStyle.css"/>
+    <meta charset="UTF-8"/>
+</h:head>
+
+<h:body>
+    <div class="page">
+        <div id="header"><a href="https://github.com/SudYar/Web3" target="_blank">Ссылка на git</a>
+            <span>Сударушкин Ярослав P3214<br/>
+                Вариант 41304</span><br/>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="content">
+        <div id="left">
+            <div>
+                <canvas id="clocks">Your browser does not support canvas</canvas>
+                <div id="timePanel" class="time-panel"></div>
+            </div>
+
+            <div id="MainPage">
+                <h:form>
+                    <p:commandButton value="Перейти на главную страницу" action="toMain"/>
+                </h:form>
+            </div>
+        </div>
+        <div id="right">
+            <img src="img/my-awesome-meme.jpeg" width="600" alt="Просто просящий котик"/>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/clock.js"></script>
+    <script type="text/javascript">
+        let c = clocks('#clocks', 300, 13, '#timePanel');
+        c.run();
+    </script>
+
+</h:body>
+
+</html>

@@ -58,7 +58,7 @@ function setY(y){
     }else if(y>3){
         y=3;
     }
-    document.getElementById("request-coordinates:y").value = y.toFixed(1);
+    ice.ace.instance("request-coordinates:y").setValue( y.toFixed(1));
 }
 
 function setR(r) {

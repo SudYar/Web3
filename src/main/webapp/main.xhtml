@@ -7,7 +7,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
 
 <h:head>
     <title>Основная страница</title>
@@ -16,11 +17,11 @@
 
 <h:body>
     <div class="page">
-        <div id="header"> <h:form>
+        <div id="header"><h:form>
             <p:commandButton action="toIndex" value="Назад"/>
             <span>Сударушкин Ярослав P3214<br/>
                 Вариант 41304</span><br/>
-            </h:form>
+        </h:form>
         </div>
         <div class="clear"></div>
     </div>
@@ -53,7 +54,7 @@
             </h:dataTable>
         </div>
         <div id="right">
-            <canvas id="graph" width="250" height="250" >Возникла ошибка с canvas</canvas>
+            <canvas id="graph" width="250" height="250">Возникла ошибка с canvas</canvas>
             <p>Зона, в которую надо попасть</p>
             <div id="request">
                 <h:form id="request-coordinates" autocomplete="off">
@@ -72,21 +73,24 @@
                         <f:validateDoubleRange minimum="-5" maximum="3"/>
                     </h:inputText>
                     <br/>
-                    <h:outputLabel for="y">Y:  <h:outputText id="y_out" value="#{mainDataBean.newDot.y}"/></h:outputLabel>
-<!--                    <ace:sliderEntry id="y" value="#{mainDataBean.newDot.y}"-->
-<!--                                     min="-3"-->
-<!--                                     max="3"-->
-<!--                                     clickableRail="true"-->
-<!--                                     stepPercent="8.3333"-->
-<!--                                     showLabels="true"-->
-<!--                                     labelPosition=""-->
-<!--                    >-->
-<!--                        <ace:ajax event="slideEnd" execute="@this" render="@form" />-->
-<!--                    </ace:sliderEntry>-->
+                    <h:outputLabel for="y">Y: <h:outputText id="y_out"
+                                                            value="#{mainDataBean.newDot.y}"/></h:outputLabel>
+                    <ace:sliderEntry id="y" value="#{mainDataBean.newDot.y}"
+                                     min="-3"
+                                     max="3"
+                                     clickableRail="true"
+                                     stepPercent="8.3333"
+                                     showLabels="true"
+                                     labelPosition=""
+                                     style="width: 50%; margin: auto"
+                    >
+                        <ace:ajax event="slideEnd" execute="@this" render="@form"/>
+                    </ace:sliderEntry>
 
-                    <br/>
-                        <h:inputHidden id="y" value="#{mainDataBean.newDot.y}" required="true"/>
-                        <p:slider for="y" minValue="-3" maxValue="3" display="y_out" step="0.5" style="width: 50%; margin: auto"/>
+<!--                    <br/>-->
+<!--                    <h:inputHidden id="y" value="#{mainDataBean.newDot.y}" required="true"/>-->
+<!--                    <p:slider for="y" minValue="-3" maxValue="3" display="y_out" step="0.5"-->
+<!--                              style="width: 50%; margin: auto"/>-->
                     <br/>
                     <h:outputLabel for="r">R(1;4):</h:outputLabel>
                     <h:inputText id="r" value="#{mainDataBean.newDot.r}"
@@ -109,7 +113,8 @@
                         <h:message class="error" for="y"/>
                         <h:message class="error" for="r"/>
                     </div>
-                    <h:commandButton  id="submit-button" value="Отправить" styleClass="button1 button" action="#{mainDataBean.addDot()}" type="submit" >
+                    <h:commandButton id="submit-button" value="Отправить" styleClass="button1 button"
+                                     action="#{mainDataBean.addDot()}" type="submit">
                         <f:ajax onevent="updateCanv" event="click" execute="@form" render="answer-table @form"/>
                     </h:commandButton>
                 </h:form>

@@ -24,6 +24,8 @@
           <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.5.0" />
           <element id="library" level="project" name="Maven: com.mchange:c3p0:0.9.5.5" />
           <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.19" />
+          <element id="library" level="project" name="Maven: org.icefaces:icefaces-ace:4.3.0" />
+          <element id="library" level="project" name="Maven: org.icefaces:icefaces:4.3.0" />
           <element id="library" level="project" name="Maven: javax.persistence:javax.persistence-api:2.2" />
           <element id="library" level="project" name="Maven: org.eclipse.persistence:eclipselink:3.0.0-RC1" />
         </element>
